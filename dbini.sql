@@ -1,5 +1,5 @@
-CREATE TABLE anime (
-    anime_id INTEGER PRIMARY KEY,
+CREATE TABLE if NOT EXISTS anime (
+    anime_id INTEGER,
     url TEXT,
     image_jpg TEXT,
     image_jpg_small TEXT,
@@ -25,93 +25,133 @@ CREATE TABLE anime (
     year INTEGER
 );
 
-CREATE TABLE producer (
-    producer_id INTEGER PRIMARY KEY,
-    type TEXT,
-    name TEXT,
-    url TEXT
-);
-
-CREATE TABLE licensor (
-    licensor_id INTEGER PRIMARY KEY,
-    type TEXT,
-    name TEXT,
-    url TEXT
-);
-
-CREATE TABLE studio (
-    studio_id INTEGER PRIMARY KEY,
-    type TEXT,
-    name TEXT,
-    url TEXT
-);
-
-CREATE TABLE genre (
-    genre_id INTEGER PRIMARY KEY,
-    type TEXT,
-    name TEXT,
-    url TEXT
-);
-
-CREATE TABLE theme (
-    theme_id INTEGER PRIMARY KEY,
-    type TEXT,
-    name TEXT,
-    url TEXT
-);
-
-CREATE TABLE demographic (
-    demographic_id INTEGER PRIMARY KEY,
-    type TEXT,
-    name TEXT,
-    url TEXT
-);
-
-CREATE TABLE anime_producer (
-    anime_id INTEGER,
+CREATE TABLE if NOT EXISTS producer (
     producer_id INTEGER,
-    FOREIGN KEY(anime_id) REFERENCES anime(anime_id),
-    FOREIGN KEY(producer_id) REFERENCES producer(producer_id)
+    type TEXT,
+    name TEXT,
+    url TEXT
 );
 
-CREATE TABLE anime_licensor (
-    anime_id INTEGER,
+CREATE TABLE if NOT EXISTS licensor (
     licensor_id INTEGER,
-    FOREIGN KEY(anime_id) REFERENCES anime(anime_id),
-    FOREIGN KEY(licensor_id) REFERENCES licensor(licensor_id)
+    type TEXT,
+    name TEXT,
+    url TEXT
 );
 
-CREATE TABLE anime_studio (
-    anime_id INTEGER,
+CREATE TABLE if NOT EXISTS studio (
     studio_id INTEGER,
-    FOREIGN KEY(anime_id) REFERENCES anime(anime_id),
-    FOREIGN KEY(studio_id) REFERENCES studio(studio_id)
+    type TEXT,
+    name TEXT,
+    url TEXT
 );
 
-CREATE TABLE anime_genre (
-    anime_id INTEGER,
+CREATE TABLE if NOT EXISTS genre (
     genre_id INTEGER,
-    FOREIGN KEY(anime_id) REFERENCES anime(anime_id),
-    FOREIGN KEY(genre_id) REFERENCES genre(genre_id)
+    type TEXT,
+    name TEXT,
+    url TEXT
 );
 
-CREATE TABLE anime_theme (
-    anime_id INTEGER,
+CREATE TABLE if NOT EXISTS theme (
     theme_id INTEGER,
-    FOREIGN KEY(anime_id) REFERENCES anime(anime_id),
-    FOREIGN KEY(theme_id) REFERENCES theme(theme_id)
+    type TEXT,
+    name TEXT,
+    url TEXT
 );
 
-CREATE TABLE anime_demographic (
-    anime_id INTEGER,
+CREATE TABLE if NOT EXISTS demographic (
     demographic_id INTEGER,
-    FOREIGN KEY(anime_id) REFERENCES anime(anime_id),
-    FOREIGN KEY(demographic_id) REFERENCES demographic(demographic_id)
+    type TEXT,
+    name TEXT,
+    url TEXT
 );
 
-CREATE TABLE anime_title (
+CREATE TABLE if NOT EXISTS character (
+    character_id INTEGER,
+    url TEXT,
+    name TEXT,
+    image_jpg TEXT,
+    image_webp TEXT,
+    image_webp_small TEXT
+);
+
+CREATE TABLE if NOT EXISTS voiceactor (
+    voiceactor_id INTEGER,
+    url TEXT,
+    image_url TEXT,
+    name TEXT,
+    website_url TEXT,
+    given_name TEXT,
+    family_name TEXT,
+    birthday string,
+    favorites INTEGER,
+    about string
+);
+
+CREATE TABLE if NOT EXISTS staff (
+    staff_id INTEGER,
+    url TEXT,
+    image_url TEXT,
+    name TEXT
+);
+
+CREATE TABLE if NOT EXISTS anime_producer (
+    anime_id INTEGER,
+    producer_id INTEGER
+);
+
+CREATE TABLE if NOT EXISTS anime_licensor (
+    anime_id INTEGER,
+    licensor_id INTEGER
+);
+
+CREATE TABLE if NOT EXISTS anime_studio (
+    anime_id INTEGER,
+    studio_id INTEGER
+);
+
+CREATE TABLE if NOT EXISTS anime_genre (
+    anime_id INTEGER,
+    genre_id INTEGER
+);
+
+CREATE TABLE if NOT EXISTS anime_theme (
+    anime_id INTEGER,
+    theme_id INTEGER
+);
+
+CREATE TABLE if NOT EXISTS anime_demographic (
+    anime_id INTEGER,
+    demographic_id INTEGER
+);
+
+CREATE TABLE if NOT EXISTS anime_title (
     anime_id INTEGER,
     title TEXT,
-    type TEXT,
-    FOREIGN KEY(anime_id) REFERENCES anime(anime_id)
+    type TEXT
+);
+
+CREATE TABLE if NOT EXISTS anime_character (
+    anime_id INTEGER,
+    character_id INTEGER,
+    role TEXT,
+    favorites INTEGER
+);
+
+CREATE TABLE if NOT EXISTS character_voiceactor (
+    character_id INTEGER,
+    voiceactor_id INTEGER
+);
+
+CREATE TABLE if NOT EXISTS anime_staff (
+    anime_id INTEGER,
+    staff_id INTEGER,
+    position TEXT
+);
+
+CREATE TABLE if NOT EXISTS opening_ending_raw(
+    anime_id INTEGER,
+    name TEXT,
+    type TEXT
 );
