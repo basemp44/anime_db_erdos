@@ -1,0 +1,29 @@
+{
+    "character_from": {
+        "character_id": 0,
+        "url": "",
+        "name": "",
+        "images_jpg_image_url": "",
+        "images_webp_image_url": "",
+        "images_webp_small_image_url": "",
+        "favorites": 0,
+        "role": ""
+    },
+    "character_to": {
+        "character_id": 0,
+        "url": "",
+        "name": "",
+        "images_jpg_image_url": "",
+        "images_webp_image_url": "",
+        "images_webp_small_image_url": "",
+        "favorites": 0,
+        "role": ""
+    },
+    "path": [],
+    "anime_choices": [],
+    "character_choices": [],
+    "staff_choices": [],
+    "voiceactor_choices": [],
+    "status": "init",
+    "with_staff": true
+}
