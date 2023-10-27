@@ -3,6 +3,7 @@ import React from 'react';
 import { IAnimeDb } from '../../../interfaces/IAnimeDb';
 import { IStaff } from '../../../interfaces/IStaff';
 import { updatePickStaff } from '../../../logic/game';
+import { EGameStatus } from '../../../enums/EGameStatus';
 
 
 function renderStaff(
@@ -14,7 +15,10 @@ function renderStaff(
 	imgClassName?: string,
 ) {
 	return (
-		<div key={`staff-${keyType}-${staff.staff_id}-${index}`} className={divClassName} onClick={onClick}>
+		<div
+			key={`staff-${keyType}-${staff.staff_id}-${index}`}
+			className={`${divClassName} ${onClick ? 'pointer' : ''}`}
+			onClick={onClick}>
 			<div className='img-container'>
 				<img
 					className={imgClassName}
@@ -31,11 +35,14 @@ function renderStaff(
 function renderStaffPickable(
 	animedb: IAnimeDb,
 	setGame: Function,
+	status: EGameStatus,
 	staff: IStaff,
 	...rest: any[]
 ) {
 	return renderStaff(
-		() => setGame(updatePickStaff(animedb, staff.staff_id)),
+		status == EGameStatus.playing
+			? () => setGame(updatePickStaff(animedb, staff.staff_id))
+			: undefined,
 		staff,
 		...rest
 	);
@@ -54,14 +61,16 @@ function renderStaffUnpickable(
 }
 
 
-function StaffChoice({animedb, setGame, staff}: {
+function StaffChoice({animedb, setGame, staff, status}: {
 	animedb: IAnimeDb,
 	setGame: Function,
-	staff: IStaff
+	staff: IStaff,
+	status: EGameStatus
 }) {
 	return renderStaffPickable(
 		animedb,
 		setGame,
+		status, // EGameStatus
 		staff,
 		'choices', //keyType
 		0, // index

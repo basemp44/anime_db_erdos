@@ -19,6 +19,7 @@ function Choices({animedb, game, setGame}: {
 							<AnimeChoice
 								animedb={animedb}
 								setGame={setGame}
+								status={game.status}
 								anime={anime}
 							/>
 						))
@@ -30,6 +31,7 @@ function Choices({animedb, game, setGame}: {
 							<CharacterChoice
 								animedb={animedb}
 								setGame={setGame}
+								status={game.status}
 								character={character}
 							/>
 						))
@@ -41,6 +43,7 @@ function Choices({animedb, game, setGame}: {
 							<StaffChoice
 								animedb={animedb}
 								setGame={setGame}
+								status={game.status}
 								staff={staff}
 							/>
 						))
@@ -52,6 +55,7 @@ function Choices({animedb, game, setGame}: {
 							<VoiceactorChoice
 								animedb={animedb}
 								setGame={setGame}
+								status={game.status}
 								voiceactor={voiceactor}
 							/>
 						))

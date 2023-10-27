@@ -7,6 +7,7 @@ import {
 	renderScoredBy,
 	renderStatus
 } from './common';
+import { EGameStatus } from '../../../enums/EGameStatus';
 
 
 function renderAnime(
@@ -21,7 +22,10 @@ function renderAnime(
 	withRank?: boolean
 ) {
 	return (
-		<div key={`anime-${keyType}-${anime.anime_id}-${index}`} className={divClassName} onClick={onClick}>
+		<div
+			key={`anime-${keyType}-${anime.anime_id}-${index}`}
+			className={`${divClassName} ${onClick ? 'pointer' : ''}`}
+			onClick={onClick}>
 			<div className='img-container'>
 				<img
 					className={imgClassName}
@@ -41,11 +45,14 @@ function renderAnime(
 function renderAnimePickable(
 	animedb: IAnimeDb,
 	setGame: Function,
+	status: EGameStatus,
 	anime: IAnime,
 	...rest: any[]
 ) {
 	return renderAnime(
-		() => setGame(updatePickAnime(animedb, anime.anime_id)),
+		status == EGameStatus.playing
+			? () => setGame(updatePickAnime(animedb, anime.anime_id))
+			: undefined,
 		anime,
 		...rest
 	);
@@ -64,14 +71,16 @@ function renderAnimeUnpickable(
 }
 
 
-function AnimeChoice({animedb, setGame, anime}: {
+function AnimeChoice({animedb, setGame, anime, status}: {
 	animedb: IAnimeDb,
 	setGame: Function,
-	anime: IAnime
+	anime: IAnime,
+	status: EGameStatus
 }) {
 	return renderAnimePickable(
 		animedb,
 		setGame,
+		status, // EGameStatus
 		anime,
 		'choices', //keyType
 		0, // index

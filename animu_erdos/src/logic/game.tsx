@@ -121,7 +121,7 @@ function updatePickCharacterWin(
 ) {
 	return (game: IGame) => ({
 		...game,
-		path: [...game.path, animedb['anime'][character]],
+		path: [...game.path, animedb['character'][character]],
 		status: EGameStatus.finish_ok
 	});
 }

@@ -3,6 +3,7 @@ import { IAnimeDb } from '../../../interfaces/IAnimeDb';
 import { IVoiceactor } from '../../../interfaces/IVoiceactor';
 import { updatePickVoiceactor } from '../../../logic/game';
 import { renderFavorites } from './common';
+import { EGameStatus } from '../../../enums/EGameStatus';
 
 
 function renderVoiceactor(
@@ -15,7 +16,10 @@ function renderVoiceactor(
 	withFavorites?: boolean
 ) {
 	return (
-		<div key={`voiceactor-${keyType}-${voiceactor.voiceactor_id}-${index}`} className={divClassName} onClick={onClick}>
+		<div
+			key={`voiceactor-${keyType}-${voiceactor.voiceactor_id}-${index}`}
+			className={`${divClassName} ${onClick ? 'pointer' : ''}`}
+			onClick={onClick}>
 			<div className='img-container'>
 				<img
 					className={imgClassName}
@@ -33,11 +37,14 @@ function renderVoiceactor(
 function renderVoiceactorPickable(
 	animedb: IAnimeDb,
 	setGame: Function,
+	status: EGameStatus,
 	voiceactor: IVoiceactor,
 	...rest: any[]
 ) {
 	return renderVoiceactor(
-		() => setGame(updatePickVoiceactor(animedb, voiceactor.voiceactor_id)),
+		status == EGameStatus.playing
+			? () => setGame(updatePickVoiceactor(animedb, voiceactor.voiceactor_id))
+			: undefined,
 		voiceactor,
 		...rest
 	);
@@ -56,14 +63,16 @@ function renderVoiceactorUnpickable(
 }
 
 
-function VoiceactorChoice({animedb, setGame, voiceactor}: {
+function VoiceactorChoice({animedb, setGame, voiceactor, status}: {
 	animedb: IAnimeDb,
 	setGame: Function,
-	voiceactor: IVoiceactor
+	voiceactor: IVoiceactor,
+	status: EGameStatus
 }) {
 	return renderVoiceactorPickable(
 		animedb,
 		setGame,
+		status, // EGameStatus
 		voiceactor,
 		'choices', //keyType
 		0, // index

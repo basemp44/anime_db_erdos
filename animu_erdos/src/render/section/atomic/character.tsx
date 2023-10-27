@@ -3,6 +3,7 @@ import { ICharacter } from '../../../interfaces/ICharacter';
 import { IAnimeDb } from '../../../interfaces/IAnimeDb';
 import { updatePickCharacter } from '../../../logic/game';
 import { renderFavorites } from './common';
+import { EGameStatus } from '../../../enums/EGameStatus';
 
 
 function renderCharacter(
@@ -15,7 +16,10 @@ function renderCharacter(
 	withFavorites?: boolean
 ) {
 	return (
-		<div key={`character-${keyType}-${character.character_id}-${index}`} className={divClassName} onClick={onClick}>
+		<div
+			key={`character-${keyType}-${character.character_id}-${index}`}
+			className={`${divClassName} ${onClick ? 'pointer' : ''}`}
+			onClick={onClick}>
 			<div className='img-container'>
 				<img
 					className={imgClassName}
@@ -33,11 +37,14 @@ function renderCharacter(
 function renderCharacterPickable(
 	animedb: IAnimeDb,
 	setGame: Function,
+	status: EGameStatus,
 	character: ICharacter,
 	...rest: any[]
 ) {
 	return renderCharacter(
-		() => setGame(updatePickCharacter(animedb, character.character_id)),
+		status == EGameStatus.playing
+			? () => setGame(updatePickCharacter(animedb, character.character_id))
+			: undefined,
 		character,
 		...rest
 	);
@@ -56,14 +63,16 @@ function renderCharacterUnpickable(
 }
 
 
-function CharacterChoice({animedb, setGame,character} : {
+function CharacterChoice({animedb, setGame, character, status} : {
 	animedb: IAnimeDb,
 	setGame: Function,
-	character: ICharacter
+	character: ICharacter,
+	status: EGameStatus
 }) {
 	return renderCharacterPickable(
 		animedb,
 		setGame,
+		status, // EGameStatus
 		character,
 		'choices', //keyType
 		0, // index
