@@ -1,3 +1,5 @@
+import { EAnimeStatus } from "../enums/EAnimeStatus";
+
 export interface IAnime {
 	anime_id: number,
 	url: string,
@@ -10,7 +12,7 @@ export interface IAnime {
 	type: string,
 	source: string,
 	episodes: number,
-	status: string,
+	status: EAnimeStatus,
 	aired_from: string,
 	aired_to: string,
 	duration: string,

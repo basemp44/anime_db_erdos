@@ -2,29 +2,11 @@ import React from 'react';
 import { IAnime } from '../../../interfaces/IAnime';
 import { IAnimeDb } from '../../../interfaces/IAnimeDb';
 import { updatePickAnime } from '../../../logic/game';
-
-
-function renderAnimeScoredBy(anime: IAnime) {
-	return (
-		<p className='scored-by'>
-			{anime.scored_by + String.fromCodePoint(9733)}
-		</p>
-	);
-}
-
-
-function renderAnimeStatus(anime: IAnime) {
-	return (
-		<p className={'status ' + anime.status}>
-			{String.fromCodePoint(8226)}
-		</p>
-	);
-}
-
-
-function renderAnimeRank(anime: IAnime) {
-	return <p className='Rank'>{'#' + anime.rank}</p>;
-}
+import {
+	renderRank,
+	renderScoredBy,
+	renderStatus
+} from './common';
 
 
 function renderAnime(
@@ -48,9 +30,9 @@ function renderAnime(
 				/>
 			</div>
 			<p className = 'title'>{anime.title}</p>
-			{ withScoredBy ? renderAnimeScoredBy(anime) : undefined }
-			{ withStatus ? renderAnimeStatus(anime) : undefined }
-			{ withRank ? renderAnimeRank(anime) : undefined }
+			{ withScoredBy ? renderScoredBy(anime.scored_by) : undefined }
+			{ withStatus ? renderStatus(anime.status) : undefined }
+			{ withRank ? renderRank(anime.rank) : undefined }
 		</div>
 	);
 }

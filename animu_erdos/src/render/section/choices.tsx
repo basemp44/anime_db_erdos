@@ -14,60 +14,48 @@ function Choices({animedb, game, setGame}: {
 	return (
 		<div className='choices'>
 			{
-				game.anime_choices ?
-					<div className='anime-choices'>
-						{
-							game.anime_choices.map(anime => (
-								<AnimeChoice
-									animedb={animedb}
-									setGame={setGame}
-									anime={anime}
-								/>
-							))
-						}
-					</div> : <></>
+				game.anime_choices
+					? game.anime_choices.map(anime => (
+							<AnimeChoice
+								animedb={animedb}
+								setGame={setGame}
+								anime={anime}
+							/>
+						))
+					: <></>
 			}
 			{
-				game.character_choices ?
-					<div className='character-choices'>
-						{
-							game.character_choices.map(character => (
-								<CharacterChoice
-									animedb={animedb}
-									setGame={setGame}
-									character={character}
-								/>
-							))
-						}
-					</div> : <></>
+				game.character_choices
+					? game.character_choices.map(character => (
+							<CharacterChoice
+								animedb={animedb}
+								setGame={setGame}
+								character={character}
+							/>
+						))
+					: <></>
 			}
 			{
-				game.staff_choices ?
-					<div className='staff-choices'>
-						{
-							game.staff_choices.map(staff => (
-								<StaffChoice
-									animedb={animedb}
-									setGame={setGame}
-									staff={staff}
-								/>
-							))
-						}
-					</div> : <></>
+				game.staff_choices
+					? game.staff_choices.map(staff => (
+							<StaffChoice
+								animedb={animedb}
+								setGame={setGame}
+								staff={staff}
+							/>
+						))
+					: <></>
 			}
 			{
-				game.voiceactor_choices ?
-					<div className='voiceactor-choices'>
-						{
-							game.voiceactor_choices.map(voiceactor => (
-								<VoiceactorChoice
-									animedb={animedb}
-									setGame={setGame}
-									voiceactor={voiceactor}
-								/>
-							))
-						}
-					</div> : <></>
+				game.voiceactor_choices
+					? game.voiceactor_choices.map(voiceactor => (
+							<VoiceactorChoice
+								animedb={animedb}
+								setGame={setGame}
+								voiceactor={voiceactor}
+							/>
+						))
+					: <></>
 			}
 		</div>
 	);

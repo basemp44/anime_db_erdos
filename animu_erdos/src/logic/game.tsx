@@ -38,7 +38,7 @@ function pickDifferentWeightAnimeCharacters(
 		const animes1 = character_anime[character1];
 		const animes2 = character_anime[character2];
 
-		if (intersection(animes1, animes2).length) {
+		if (!intersection(animes1, animes2).length) {
 			return [character1, character2];
 		}
 	}
@@ -122,10 +122,6 @@ function updatePickCharacterWin(
 	return (game: IGame) => ({
 		...game,
 		path: [...game.path, animedb['anime'][character]],
-		anime_choices: [],
-		character_choices: [],
-		staff_choices: [],
-		voiceactor_choices: [],
 		status: EGameStatus.finish_ok
 	});
 }

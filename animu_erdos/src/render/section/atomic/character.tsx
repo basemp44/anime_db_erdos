@@ -2,15 +2,7 @@ import React from 'react';
 import { ICharacter } from '../../../interfaces/ICharacter';
 import { IAnimeDb } from '../../../interfaces/IAnimeDb';
 import { updatePickCharacter } from '../../../logic/game';
-
-
-function renderCharacterFavorites(character: ICharacter) {
-	return (
-		<p className='favorites'>
-			{character.favorites + String.fromCodePoint(9733)}
-		</p>
-	);
-}
+import { renderFavorites } from './common';
 
 
 function renderCharacter(
@@ -32,7 +24,7 @@ function renderCharacter(
 				/>
 			</div>
 			<p className='name'>{character.name}</p>
-			{ withFavorites ? renderCharacterFavorites(character) : undefined }
+			{ withFavorites ? renderFavorites(character.favorites) : undefined }
 		</div>
 	);
 }

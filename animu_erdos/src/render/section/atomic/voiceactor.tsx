@@ -2,15 +2,7 @@ import React from 'react';
 import { IAnimeDb } from '../../../interfaces/IAnimeDb';
 import { IVoiceactor } from '../../../interfaces/IVoiceactor';
 import { updatePickVoiceactor } from '../../../logic/game';
-
-
-function renderVoiceactorFavorites(voiceactor: IVoiceactor) {
-	return (
-		<p className='favorites'>
-			{voiceactor.favorites + String.fromCodePoint(9733)}
-		</p>
-	);
-}
+import { renderFavorites } from './common';
 
 
 function renderVoiceactor(
@@ -32,7 +24,7 @@ function renderVoiceactor(
 				/>
 			</div>
 			<p className='name'>{voiceactor.name}</p>
-			{ withFavorites ? renderVoiceactorFavorites(voiceactor) : undefined }
+			{ withFavorites ? renderFavorites(voiceactor.favorites) : undefined }
 		</div>
 	);
 }
