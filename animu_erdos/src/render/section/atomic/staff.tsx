@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { IAnimeDb } from '../../../interfaces/IAnimeDb';
 import { IStaff } from '../../../interfaces/IStaff';
 import { updatePickStaff } from '../../../logic/game';
@@ -53,25 +54,27 @@ function renderStaffUnpickable(
 }
 
 
-function renderStaffChoices(
+function StaffChoice({animedb, setGame, staff}: {
 	animedb: IAnimeDb,
 	setGame: Function,
-) {
-	return (staff: IStaff) => {
-		return renderStaffPickable(
-			animedb,
-			setGame,
-			staff,
-			'choices', //keyType
-			0, // index
-			'card staff', // divClassName
-			'' // imgClassName
-		);
-	}
+	staff: IStaff
+}) {
+	return renderStaffPickable(
+		animedb,
+		setGame,
+		staff,
+		'choices', //keyType
+		0, // index
+		'card staff', // divClassName
+		'' // imgClassName
+	);
 }
 
 
-function renderStaffPath(staff: IStaff, index: number) {
+function StaffPath({staff, index} : {
+	staff: IStaff,
+	index: number
+}) {
 	return renderStaffUnpickable(
 		staff,
 		'path', //keyType
@@ -83,6 +86,6 @@ function renderStaffPath(staff: IStaff, index: number) {
 
 
 export {
-	renderStaffChoices,
-	renderStaffPath
+	StaffChoice,
+	StaffPath
 };

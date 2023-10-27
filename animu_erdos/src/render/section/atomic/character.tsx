@@ -1,3 +1,4 @@
+import React from 'react';
 import { ICharacter } from '../../../interfaces/ICharacter';
 import { IAnimeDb } from '../../../interfaces/IAnimeDb';
 import { updatePickCharacter } from '../../../logic/game';
@@ -63,26 +64,27 @@ function renderCharacterUnpickable(
 }
 
 
-function renderCharacterChoices(
+function CharacterChoice({animedb, setGame,character} : {
 	animedb: IAnimeDb,
 	setGame: Function,
-) {
-	return (character: ICharacter) => {
-		return renderCharacterPickable(
-			animedb,
-			setGame,
-			character,
-			'choices', //keyType
-			0, // index
-			'card character', // divClassName
-			'', // imgClassName
-			true // withFavorites
-		);
-	}
+	character: ICharacter
+}) {
+	return renderCharacterPickable(
+		animedb,
+		setGame,
+		character,
+		'choices', //keyType
+		0, // index
+		'card character', // divClassName
+		'', // imgClassName
+		true // withFavorites
+	);
 }
 
 
-function renderCharacterFromTo(character: ICharacter) {
+function CharacterFromTo({character} : {
+	character: ICharacter
+}) {
 	return renderCharacterUnpickable(
 		character,
 		'from-to', //keyType
@@ -94,7 +96,10 @@ function renderCharacterFromTo(character: ICharacter) {
 }
 
 
-function renderCharacterPath(character: ICharacter, index: number) {
+function CharacterPath({character, index} : {
+	character: ICharacter,
+	index: number
+}) {
 	return renderCharacterUnpickable(
 		character,
 		'path', //keyType
@@ -107,7 +112,7 @@ function renderCharacterPath(character: ICharacter, index: number) {
 
 
 export {
-	renderCharacterChoices,
-	renderCharacterFromTo,
-	renderCharacterPath
+	CharacterChoice,
+	CharacterFromTo,
+	CharacterPath
 };

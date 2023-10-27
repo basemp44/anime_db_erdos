@@ -1,30 +1,54 @@
+import {useEffect, useRef } from "react";
 import { IAnime } from '../../interfaces/IAnime';
 import { ICharacter } from '../../interfaces/ICharacter';
 import { IGame } from '../../interfaces/IGame';
 import { IStaff } from '../../interfaces/IStaff';
 import { IVoiceactor } from '../../interfaces/IVoiceactor';
-import { renderAnimePath } from './atomic/anime';
-import { renderCharacterPath } from './atomic/character';
-import { renderStaffPath } from './atomic/staff';
-import { renderVoiceactorPath } from './atomic/voiceactor';
+import { AnimePath } from './atomic/Anime';
+import { CharacterPath } from './atomic/Character';
+import { StaffPath } from './atomic/Staff';
+import { VoiceactorPath } from './atomic/Voiceactor';
 
 
-function renderPath(game: IGame) {
+function Path({game}: {
+	game: IGame
+}) {
+	const pathEndRef = useRef<HTMLInputElement | null>(null);
+	const scrollToBottom = () => {
+    pathEndRef.current && pathEndRef.current.scrollIntoView({ block: 'end', behavior: 'smooth' });
+  };
+  useEffect(scrollToBottom, [game.path]);
+
 	return (
 		<div className='path'>
-			{game.path.map((it, index) => {
-				if (it.hasOwnProperty('anime_id'))
-					return renderAnimePath(it as IAnime, index);
-				else if (it.hasOwnProperty('character_id'))
-					return renderCharacterPath(it as ICharacter, index);
-				else if (it.hasOwnProperty('staff_id'))
-					return renderStaffPath(it as IStaff, index);
-				else if (it.hasOwnProperty('voiceactor_id'))
-					return renderVoiceactorPath(it as IVoiceactor, index);
-			})}
+			<div className='scroll-path'>
+				{
+					game.path.map((it, index) => {
+						if (it.hasOwnProperty('anime_id'))
+							return (
+								<AnimePath anime={it as IAnime} index={index}/>
+							)
+						else if (it.hasOwnProperty('character_id'))
+							return (
+								<CharacterPath character={it as ICharacter} index={index}/>
+							)
+						else if (it.hasOwnProperty('staff_id'))
+							return (
+								<StaffPath staff={it as IStaff} index={index}/>
+							)
+						else if (it.hasOwnProperty('voiceactor_id'))
+							return (
+								<VoiceactorPath voiceactor={it as IVoiceactor} index={index}/>
+							)
+					})
+				}
+				<span ref={pathEndRef} />
+			</div>
 		</div>
 	);
 }
 
 
-export default renderPath;
+export {
+	Path
+};

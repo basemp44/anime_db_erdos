@@ -1,3 +1,4 @@
+import React from 'react';
 import { IAnimeDb } from '../../../interfaces/IAnimeDb';
 import { IVoiceactor } from '../../../interfaces/IVoiceactor';
 import { updatePickVoiceactor } from '../../../logic/game';
@@ -63,26 +64,28 @@ function renderVoiceactorUnpickable(
 }
 
 
-function renderVoiceactorChoices(
+function VoiceactorChoice({animedb, setGame, voiceactor}: {
 	animedb: IAnimeDb,
 	setGame: Function,
-) {
-	return (voiceactor: IVoiceactor) => {
-		return renderVoiceactorPickable(
-			animedb,
-			setGame,
-			voiceactor,
-			'choices', //keyType
-			0, // index
-			'card voiceactor', // divClassName
-			'', // imgClassName
-			true // withFavorites
-		);
-	}
+	voiceactor: IVoiceactor
+}) {
+	return renderVoiceactorPickable(
+		animedb,
+		setGame,
+		voiceactor,
+		'choices', //keyType
+		0, // index
+		'card voiceactor', // divClassName
+		'', // imgClassName
+		true // withFavorites
+	);
 }
 
 
-function renderVoiceactorPath(voiceactor: IVoiceactor, index: number) {
+function VoiceactorPath({voiceactor, index}: {
+	voiceactor: IVoiceactor,
+	index: number
+}) {
 	return renderVoiceactorUnpickable(
 		voiceactor,
 		'path', //keyType
@@ -95,6 +98,6 @@ function renderVoiceactorPath(voiceactor: IVoiceactor, index: number) {
 
 
 export {
-	renderVoiceactorChoices,
-	renderVoiceactorPath
+	VoiceactorChoice,
+	VoiceactorPath
 };

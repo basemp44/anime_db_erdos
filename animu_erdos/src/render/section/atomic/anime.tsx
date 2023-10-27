@@ -1,3 +1,4 @@
+import React from 'react';
 import { IAnime } from '../../../interfaces/IAnime';
 import { IAnimeDb } from '../../../interfaces/IAnimeDb';
 import { updatePickAnime } from '../../../logic/game';
@@ -81,28 +82,30 @@ function renderAnimeUnpickable(
 }
 
 
-function renderAnimeChoices(
+function AnimeChoice({animedb, setGame, anime}: {
 	animedb: IAnimeDb,
 	setGame: Function,
-) {
-	return (anime: IAnime) => {
-		return renderAnimePickable(
-			animedb,
-			setGame,
-			anime,
-			'choices', //keyType
-			0, // index
-			'card anime', // divClassName
-			'', // imgClassName
-			true, // withScoredBy
-			true, // withStatus
-			true // withRank
-		);
-	}
+	anime: IAnime
+}) {
+	return renderAnimePickable(
+		animedb,
+		setGame,
+		anime,
+		'choices', //keyType
+		0, // index
+		'card anime', // divClassName
+		'', // imgClassName
+		true, // withScoredBy
+		true, // withStatus
+		true // withRank
+	);
 }
 
 
-function renderAnimePath(anime: IAnime, index: number) {
+function AnimePath({anime, index}: {
+	anime: IAnime,
+	index: number
+}) {
 	return renderAnimeUnpickable(
 		anime,
 		'path', //keyType
@@ -117,6 +120,6 @@ function renderAnimePath(anime: IAnime, index: number) {
 
 
 export {
-	renderAnimeChoices,
-	renderAnimePath
+	AnimeChoice,
+	AnimePath
 };
