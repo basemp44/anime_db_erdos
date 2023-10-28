@@ -83,7 +83,7 @@ function updatePickAnime(
 ) {
 	const animeP = animedb['anime'][anime];
 	const animeCharacterP = animedb['anime_character'][anime];
-	const animeStaffP = animedb['anime_staff'][anime];
+	const animeStaffP = animedb['anime_staff'][anime] || [];
 
 	return (game: IGame) => ({
 		...game,

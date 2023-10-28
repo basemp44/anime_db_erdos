@@ -57,9 +57,12 @@ def count_tables(tables, db='animedb.sqlite'):
     return df.T
 
 
-def get_table(table, db='animedb.sqlite'):
+def get_table(table, db='animedb.sqlite', columns=[]):
     conn = sq.connect(db)
-    df = pd.read_sql(f'select * from {table}', conn)
+    if len(columns):
+        df = pd.read_sql(f'select {", ".join(columns)} from {table}', conn)
+    else:
+        df = pd.read_sql(f'select * from {table}', conn)
     conn.close()
     return df
 

@@ -29,7 +29,7 @@ function renderAnime(
 			<div className='img-container'>
 				<img
 					className={imgClassName}
-					src={anime.image_webp}
+					src={`https://cdn.myanimelist.net/im${anime.image_webp}`}
 					alt={anime.title}
 				/>
 			</div>

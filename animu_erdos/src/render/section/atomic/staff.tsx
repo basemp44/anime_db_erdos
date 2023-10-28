@@ -22,7 +22,7 @@ function renderStaff(
 			<div className='img-container'>
 				<img
 					className={imgClassName}
-					src={staff.image_url}
+					src={`https://cdn.myanimelist.net/im${staff.image_url}`}
 					alt={staff.name}
 				/>
 			</div>

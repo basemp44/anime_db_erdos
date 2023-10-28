@@ -23,7 +23,7 @@ function renderVoiceactor(
 			<div className='img-container'>
 				<img
 					className={imgClassName}
-					src={voiceactor.image_url}
+					src={`https://cdn.myanimelist.net/im${voiceactor.image_url}`}
 					alt={voiceactor.name}
 				/>
 			</div>

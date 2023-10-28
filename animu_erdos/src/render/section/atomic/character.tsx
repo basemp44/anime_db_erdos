@@ -23,7 +23,7 @@ function renderCharacter(
 			<div className='img-container'>
 				<img
 					className={imgClassName}
-					src={character.images_webp_image_url}
+					src={`https://cdn.myanimelist.net/im${character.images_webp_image_url}`}
 					alt={character.name}
 				/>
 			</div>
