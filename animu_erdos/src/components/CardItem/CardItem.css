@@ -1,0 +1,126 @@
+:root {
+  --card-item-size-l: 150px;
+  --card-item-size-xl: 200px;
+  --card-item-img-zoom: 10px;
+  --card-item-border-radius: 10px;
+  --card-item-border-width: 3px;
+  --card-item-opacity-start: 0.85;
+  --card-item-p-padding: 0.5rem;
+  --character-color: 0, 0, 155;
+  --anime-color: 155, 0, 0;
+  --voiceactor-color: 0, 155, 0;
+  --staff-color: 155, 155, 0;
+}
+
+.card-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--card-item-border-radius);
+  border-width: var(--card-item-border-width);
+  border-style: solid;
+}
+.card-item.size-l {
+  height: var(--card-item-size-l);
+  width: var(--card-item-size-l);
+}
+.card-item.size-xl {
+  height: var(--card-item-size-xl);
+  width: var(--card-item-size-xl);
+}
+
+.card-item img {
+  left: calc(0px - var(--card-item-img-zoom) / 2);
+  top: calc(0px - var(--card-item-img-zoom) / 2);
+  position: absolute;
+  object-fit: cover;
+  object-position: center;
+}
+.card-item.size-l img {
+  width: calc(var(--card-item-size-l) + var(--card-item-img-zoom));
+  height: calc(var(--card-item-size-l) + var(--card-item-img-zoom));
+}
+.card-item.size-xl img {
+  width: calc(var(--card-item-size-xl) + var(--card-item-img-zoom));
+  height: calc(var(--card-item-size-xl) + var(--card-item-img-zoom));
+}
+
+.card-item p {
+  position: absolute;
+  left: 0;
+  margin: 0;
+  color: white;
+  text-align: left;
+  border-radius: calc(var(--card-item-border-radius) - var(--card-item-border-width));
+  padding: var(--card-item-p-padding);
+  padding-left: calc(var(--card-item-p-padding) + 4px);
+  width: calc(100% - var(--card-item-p-padding)*2 - 4px);
+}
+
+.card-item p.status,
+.card-item p.rank,
+.card-item p.scored-by,
+.card-item p.favorites {
+  top: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.card-item p.scored-by,
+.card-item p.favorites {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, var(--card-item-opacity-start)) 45%, rgba(0, 0, 0, 0) 100%);
+}
+
+.card-item p.status,
+.card-item p.rank {
+  text-align: right;
+}
+
+.card-item p.status.green { color: green; }
+.card-item p.status.red   { color: red; }
+.card-item p.status.gray  { color: gray; }
+
+.card-item p.rank {
+  left: -16px
+}
+
+.card-item p.name,
+.card-item p.title {
+  bottom: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, var(--card-item-opacity-start)) 45%, rgba(0, 0, 0, 0) 100%)
+}
+
+.card-item.character p.name,
+.card-item.character p.title {
+  background: linear-gradient(to top, rgba(var(--character-color), var(--card-item-opacity-start)) 45%, rgba(var(--character-color), 0) 100%)
+}
+.card-item.anime p.name,
+.card-item.anime p.title {
+  background: linear-gradient(to top, rgba(var(--anime-color), var(--card-item-opacity-start)) 45%, rgba(var(--anime-color), 0) 100%)
+}
+.card.voiceactor p.name,
+.card.voiceactor p.title {
+  background: linear-gradient(to top, rgba(var(--voiceactor-color), var(--card-opacity-start)) 45%, rgba(var(--voiceactor-color), 0) 100%)
+}
+.card.staff p.name,
+.card.staff p.title {
+  background: linear-gradient(to top, rgba(var(--staff-color), var(--card-opacity-start)) 45%, rgba(var(--staff-color), 0) 100%)
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.character {
+  border-color: rgba(var(--character-color));
+}
+.anime {
+  border-color: rgba(var(--anime-color));
+}
+.voiceactor {
+  border-color: rgba(var(--voiceactor-color));
+}
+.staff {
+  border-color: rgba(var(--staff-color));
+}

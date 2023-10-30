@@ -5,7 +5,7 @@ import { updateInitGame } from '../logic/game';
 import { FromTo } from '../render/section/FromTo';
 import { Path } from '../render/section/Path';
 import { Choices } from '../render/section/Choices';
-
+import TestItems from '../components/TestItems/TestItems';
 
 function Game({animedb, game, setGame}: {
 	animedb: IAnimeDb,
@@ -20,6 +20,7 @@ function Game({animedb, game, setGame}: {
 						Start Game
 					</button>
 				</div>
+				<TestItems/>
 			</div>
 		);
 	else

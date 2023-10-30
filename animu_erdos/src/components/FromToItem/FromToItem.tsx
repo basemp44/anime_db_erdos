@@ -1,94 +1,51 @@
 import './FromToItem.css';
 import { useState } from 'react';
-import EItemType from '../../enums/EItemType';
-
-
-type Paragraphs = {
-  [key: string]: string;
-};
-
-
-function FromToItemSingle({
-  itemType,
-  id,
-  visible,
-  pointer,
-  img_url,
-  img_alt,
-  paragraphs
-}: {
-  itemType: EItemType,
-  id: number,
-  visible: boolean,
-  pointer: boolean,
-  img_url: string,
-  img_alt: string,
-  paragraphs: Paragraphs
-}) {
-  const cVisible = visible ? 'to-visible' : 'to-invisible';
-  const cPointer = pointer ? 'pointer' : '';
-
-  return (
-    <div
-      key={`fromto-${itemType}-${id}`}
-      className={`from-to-item ${itemType} ${cVisible} ${cPointer}`}>
-      <img
-        src={img_url}
-        alt={img_alt}/>
-        {
-          Object
-            .entries(paragraphs)
-            .map(([className, text]) => (<p className={className}>{text}</p>))
-        }
-    </div>
-  );
-}
+import { CardItem } from '../CardItem/CardItem';
+import { ECardSize } from '../../enums/ECardSize';
 
 
 function FromToItem({
   timeToggled,
-  fromToItemP1,
-  fromToItemP2,
+  cardItemP1,
+  cardItemP2,
 }: {
   timeToggled: number
-  fromToItemP1: any
-  fromToItemP2: any
+  cardItemP1: any
+  cardItemP2: any
 }) {
-  const [fromToVisible, setFromToVisible] = useState(true)
+  const [visible, setVisible] = useState(true)
   return (
-    <div
-      className="from-to-item-container-container"
-      onClick={() => {
-        if (fromToVisible) {
-          setFromToVisible(!fromToVisible);
-          setTimeout(() => setFromToVisible(fromToVisible), timeToggled);
-        }
-      }}>
-      <div className='from-to-item-container'>
-        <FromToItemSingle
-          itemType={fromToItemP1.itemType}
-          id={fromToItemP1.id}
-          visible={fromToVisible}
-          pointer={true}
-          img_url={fromToItemP1.img_url}
-          img_alt={fromToItemP1.img_alt}
-          paragraphs={fromToItemP1.paragraphs}/>
+    <div className="from-to-item-container-container">
+      <div className={`from-to-item-container ${visible ? 'to-visible' : 'to-invisible'}`}>
+        <CardItem
+          itemType={cardItemP1.itemType}
+          id={cardItemP1.id}
+          onClick={() => {
+            if (visible) {
+              setVisible(!visible);
+              setTimeout(() => setVisible(visible), timeToggled);
+            }
+          }}
+          cardSize={ECardSize.XL}
+          imgUrl={cardItemP1.imgUrl}
+          imgAlt={cardItemP1.imgAlt}
+          paragraphs={cardItemP1.paragraphs}/>
       </div>
-      <div className='from-to-item-container'>
-        <FromToItemSingle
-          itemType={fromToItemP2.itemType}
-          id={fromToItemP2.id}
-          visible={!fromToVisible}
-          pointer={false}
-          img_url={fromToItemP2.img_url}
-          img_alt={fromToItemP2.img_alt}
-          paragraphs={fromToItemP2.paragraphs}/>
+      <div className={`from-to-item-container ${visible ? 'to-invisible' : 'to-visible'}`}>
+        <CardItem
+          itemType={cardItemP2.itemType}
+          id={cardItemP2.id}
+          onClick={undefined}
+          cardSize={ECardSize.XL}
+          imgUrl={cardItemP2.imgUrl}
+          imgAlt={cardItemP2.imgAlt}
+          paragraphs={cardItemP2.paragraphs}/>
       </div>
     </div>
   )
 }
 
 export {
-  FromToItemSingle,
+  CardItem,
   FromToItem
 };
