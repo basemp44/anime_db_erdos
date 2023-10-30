@@ -2,7 +2,7 @@
   --from-to-item-size: 200px;
   --from-to-item-img-zoom: 10px;
   --from-to-item-border-radius: 10px;
-  --from-to-item-border-width: 2px;
+  --from-to-item-border-width: 3px;
   --from-to-item-opacity-start: 0.85;
   --from-to-item-p-padding: 0.5rem;
   --from-to-item-transition-time: 0.5s;
@@ -99,6 +99,8 @@
 
 .from-to-item-container-container {
   position: relative;
+  height: var(--from-to-item-size);
+  width: var(--from-to-item-size);
 }
 
 .from-to-item-container {

@@ -1,0 +1,85 @@
+:root {
+  --path-item-border-radius: 8px;
+  --path-item-border-width: 3px;
+  --path-item-img-zoom: 2px;
+  --path-item-font-size: 20px;
+  --path-item-img-zoom-last: 4px;
+  --path-item-font-size-last: 32px;
+  --path-item-size: 48px;
+  --path-item-size-last: 78px;
+  --character-color: 0, 0, 155;
+  --anime-color: 155, 0, 0;
+  --voiceactor-color: 0, 155, 0;
+  --staff-color: 155, 155, 0;
+}
+
+.path-item {
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 10px;
+  border-radius: var(--path-item-border-radius);
+  border-width: var(--path-item-border-width);
+  border-style: solid;
+  margin-bottom: 2px;
+}
+
+.path-item .img-container {
+  height: var(--path-item-size);
+  width: var(--path-item-size);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--path-item-border-radius);
+}
+
+.path-item .img-container img {
+  width: calc(var(--path-item-size) + var(--path-item-img-zoom));
+  height: calc(var(--path-item-size) + var(--path-item-img-zoom));
+  left: calc(0px - var(--path-item-img-zoom) / 2);
+  top: calc(0px - var(--path-item-img-zoom) / 2);
+  position: absolute;
+  object-fit: cover;
+  object-position: center;
+}
+
+.path-item p {
+  font-size: var(--path-item-font-size);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.path-item:last-of-type {
+  margin-bottom: 0;
+}
+
+.path-item:last-of-type .img-container {
+  height: var(--path-item-size-last);
+  width: var(--path-item-size-last);
+}
+
+.path-item:last-of-type img {
+  width: calc(var(--path-item-size-last) + var(--path-item-img-zoom-last));
+  height: calc(var(--path-item-size-last) + var(--path-item-img-zoom-last));
+  left: calc(0px - var(--path-item-img-zoom-last) / 2);
+  top: calc(0px - var(--path-item-img-zoom-last) / 2);
+}
+
+.path-item:last-of-type p {
+  font-size: var(--path-item-font-size-last);
+}
+
+.character {
+  border-color: rgba(var(--character-color));
+}
+.anime {
+  border-color: rgba(var(--anime-color));
+}
+.voiceactor {
+  border-color: rgba(var(--voiceactor-color));
+}
+.staff {
+  border-color: rgba(var(--staff-color));
+}
