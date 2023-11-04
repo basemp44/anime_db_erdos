@@ -1,0 +1,13 @@
+.from-to {
+  display: flex;
+  grid-area: from-to;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  background-color: yellow;
+}
+
+.from-to .arrow {
+  font-size: 24px;
+}

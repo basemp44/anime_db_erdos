@@ -1,0 +1,12 @@
+:root {
+  --choices-grid-gap: 10px;
+  --choices-card-item-size: var(--card-item-size-l);
+}
+
+.choices {
+  grid-area: choices;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, calc(var(--choices-card-item-size) + var(--choices-grid-gap)/2));
+  grid-gap: var(--choices-grid-gap);
+  justify-content: center;
+}

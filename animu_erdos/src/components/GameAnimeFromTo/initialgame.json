@@ -1,0 +1,29 @@
+{
+    "config": {
+        "api": {
+            "baseUrl": "string",
+            "initUrl": "string",
+            "bulkGetUrl": "./animedb.json.gz",
+            "cardItemUrl": "string",
+            "choicesUrl": "string"          
+        },
+        "version": 1,
+        "fromToTimeToggled": 1500    
+    },
+    "game_params": {
+        "target_from_main": "character",
+        "target_from_alt": "anime",
+        "target_to_main": "character",
+        "target_to_alt": "anime",
+        "choice_options": [
+            "anime",
+            "character",
+            "voiceactor",
+            "staff"
+        ]
+    },
+    "status": "init",
+    "fromto": [],
+    "path": [],
+    "choices": []
+}

@@ -1,7 +1,18 @@
 import './PathItem.css';
-import React from 'react';
 import EItemType from '../../enums/EItemType';
 
+
+interface IPathItemLogic {
+  itemType: EItemType,
+  id: number,
+  imgUrl: string,
+  imgAlt: string,
+  name: string
+}
+
+interface IPathItem extends IPathItemLogic{
+  index: number,
+}
 
 function PathItem({
   itemType,
@@ -9,15 +20,8 @@ function PathItem({
   index,
   imgUrl,
   imgAlt,
-  text
-}: {
-  itemType: EItemType,
-  id: number,
-  index: number,
-  imgUrl: string,
-  imgAlt: string,
-  text: string
-}) {
+  name
+}: IPathItem) {
   return (
     <div
       key={`path-${itemType}-${id}-${index}`}
@@ -25,11 +29,10 @@ function PathItem({
       <div className="img-container">
         <img src={imgUrl} alt={imgAlt}/>
       </div>
-      <p>{text}</p>
+      <p>{name}</p>
     </div>
   );
 }
 
-export {
-  PathItem
-};
+export type { IPathItemLogic, IPathItem };
+export { PathItem };

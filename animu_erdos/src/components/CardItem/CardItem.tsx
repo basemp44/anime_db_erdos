@@ -3,8 +3,38 @@ import React from 'react';
 import EItemType from '../../enums/EItemType';
 import { ECardSize } from '../../enums/ECardSize';
 
+
 type Paragraphs = {
   [key: string]: string;
+};
+
+
+interface ICardItemLogicMin {
+  id: number,
+  itemType: EItemType
+};
+
+
+interface ICardItemLogicBase extends ICardItemLogicMin {
+  imgUrl: string,
+  imgAlt: string,
+  name: string
+};
+
+
+interface ICardItemLogic extends ICardItemLogicBase {
+  paragraphs: Paragraphs
+};
+
+
+interface ICardItemLogicRel extends ICardItemLogic {
+  relations: Array<ICardItemLogicMin>
+}
+
+
+interface ICardItem extends ICardItemLogic {
+  onClick: React.MouseEventHandler<HTMLDivElement> | undefined,
+  cardSize: ECardSize
 };
 
 
@@ -15,16 +45,9 @@ function CardItem({
   cardSize,
   imgUrl,
   imgAlt,
+  name,
   paragraphs
-}: {
-  itemType: EItemType,
-  id: number,
-  onClick: React.MouseEventHandler<HTMLDivElement> | undefined,
-  cardSize: ECardSize,
-  imgUrl: string,
-  imgAlt: string,
-  paragraphs: Paragraphs
-}) {
+}: ICardItem) {
   const cPointer = onClick ? 'pointer' : '';
   return (
     <div
@@ -32,6 +55,7 @@ function CardItem({
       className={`card-item ${itemType} ${cPointer} ${cardSize}`}
       onClick={onClick}>
       <img src={imgUrl} alt={imgAlt}/>
+      <p className='name'>{name}</p>
       {
         Object
           .entries(paragraphs)
@@ -41,6 +65,13 @@ function CardItem({
   );
 }
 
-export {
-  CardItem
+
+export type {
+  ICardItemLogicMin,
+  ICardItemLogicBase,
+  ICardItemLogic,
+  ICardItem,
+  ICardItemLogicRel
 };
+
+export { CardItem };

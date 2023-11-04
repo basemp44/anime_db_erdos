@@ -1,25 +1,32 @@
 import './FromToItem.css';
 import { useState } from 'react';
-import { CardItem } from '../CardItem/CardItem';
+import { CardItem, ICardItemLogic } from '../CardItem/CardItem';
 import { ECardSize } from '../../enums/ECardSize';
+
+
+interface IFromToItemLogic {
+  main: ICardItemLogic
+  alt: ICardItemLogic
+};
+
+
+interface IFromToItem extends IFromToItemLogic {
+  timeToggled: number
+};
 
 
 function FromToItem({
   timeToggled,
-  cardItemP1,
-  cardItemP2,
-}: {
-  timeToggled: number
-  cardItemP1: any
-  cardItemP2: any
-}) {
+  main,
+  alt,
+}: IFromToItem) {
   const [visible, setVisible] = useState(true)
   return (
     <div className="from-to-item-container-container">
       <div className={`from-to-item-container ${visible ? 'to-visible' : 'to-invisible'}`}>
         <CardItem
-          itemType={cardItemP1.itemType}
-          id={cardItemP1.id}
+          itemType={main.itemType}
+          id={main.id}
           onClick={() => {
             if (visible) {
               setVisible(!visible);
@@ -27,25 +34,26 @@ function FromToItem({
             }
           }}
           cardSize={ECardSize.XL}
-          imgUrl={cardItemP1.imgUrl}
-          imgAlt={cardItemP1.imgAlt}
-          paragraphs={cardItemP1.paragraphs}/>
+          imgUrl={main.imgUrl}
+          imgAlt={main.imgAlt}
+          name={main.name}
+          paragraphs={main.paragraphs}/>
       </div>
       <div className={`from-to-item-container ${visible ? 'to-invisible' : 'to-visible'}`}>
         <CardItem
-          itemType={cardItemP2.itemType}
-          id={cardItemP2.id}
+          itemType={alt.itemType}
+          id={alt.id}
           onClick={undefined}
           cardSize={ECardSize.XL}
-          imgUrl={cardItemP2.imgUrl}
-          imgAlt={cardItemP2.imgAlt}
-          paragraphs={cardItemP2.paragraphs}/>
+          imgUrl={alt.imgUrl}
+          imgAlt={alt.imgAlt}
+          name={alt.name}
+          paragraphs={alt.paragraphs}/>
       </div>
     </div>
-  )
+  );
 }
 
-export {
-  CardItem,
-  FromToItem
-};
+
+export type { IFromToItem, IFromToItemLogic };
+export { FromToItem };

@@ -1,0 +1,8 @@
+.from-to-path-choice {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-areas:
+    "path from-to from-to stats"
+    "path choices choices stats";
+  grid-gap: 10px;
+}
