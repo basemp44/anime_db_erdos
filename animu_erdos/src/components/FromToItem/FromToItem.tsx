@@ -33,6 +33,7 @@ function FromToItem({
               setTimeout(() => setVisible(visible), timeToggled);
             }
           }}
+          pointer={true}
           cardSize={ECardSize.XL}
           imgUrl={main.imgUrl}
           imgAlt={main.imgAlt}
@@ -44,6 +45,7 @@ function FromToItem({
           itemType={alt.itemType}
           id={alt.id}
           onClick={undefined}
+          pointer={false}
           cardSize={ECardSize.XL}
           imgUrl={alt.imgUrl}
           imgAlt={alt.imgAlt}

@@ -1,9 +1,13 @@
+:root {
+  --from-to-padding: 1rem;
+}
+
 .from-to {
   display: flex;
   grid-area: from-to;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: var(--from-to-padding);
   gap: 1rem;
   background-color: yellow;
 }

@@ -1,12 +1,23 @@
 import './CardItem.css';
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faCircleUp } from '@fortawesome/free-regular-svg-icons';
 import EItemType from '../../enums/EItemType';
 import { ECardSize } from '../../enums/ECardSize';
+import { EAnimeStatus, mapAnimeStatus } from '../../enums/EAnimeStatus';
 
 
 type Paragraphs = {
   [key: string]: string;
 };
+
+
+enum EParagraph {
+  status = 'status',
+  rank = 'rank',
+  scored_by = 'scored_by',
+  favorites = 'favorites',
+}
 
 
 interface ICardItemLogicMin {
@@ -39,6 +50,50 @@ interface ICardItem extends ICardItemLogic {
 };
 
 
+function formatParagraph(
+  mainKey: string
+) {
+  return ([className, text]: [string, string]) => {
+    switch(className) {
+      case EParagraph.status:
+        const color = mapAnimeStatus[text as EAnimeStatus]
+        return (
+          <p
+            key={`${mainKey}-${className}`}
+            className={`${className} ${color}`}>
+            <FontAwesomeIcon icon={faCircleUp}/>
+          </p>
+        );
+      case EParagraph.rank:
+        return (
+          <p
+            key={`${mainKey}-${className}`}
+            className={className}>
+            {text}
+          </p>
+        );
+      case EParagraph.scored_by:
+        return (
+          <p
+            key={`${mainKey}-${className}`}
+            className={className.split('_').join('-')}>
+            <FontAwesomeIcon icon={faStar}/>
+            {text}
+          </p>
+        );
+      case EParagraph.favorites:
+        return (
+          <p
+            key={`${mainKey}-${className}`}
+            className={className}>
+            <FontAwesomeIcon icon={faStar}/>
+            {text}
+          </p>
+        );
+    }
+  }
+}
+
 function CardItem({
   itemType,
   id,
@@ -53,7 +108,6 @@ function CardItem({
   const cPointer = pointer ? 'pointer' : '';
   return (
     <div
-      key={`card-item-${itemType}-${id}`}
       className={`card-item ${itemType} ${cPointer} ${cardSize}`}
       onClick={onClick}>
       <img src={imgUrl} alt={imgAlt}/>
@@ -61,7 +115,8 @@ function CardItem({
       {
         Object
           .entries(paragraphs)
-          .map(([className, text]) => (<p className={className}>{text}</p>))
+          .map(formatParagraph(`card-item-${itemType}-${id}`
+          ))
       }
     </div>
   );

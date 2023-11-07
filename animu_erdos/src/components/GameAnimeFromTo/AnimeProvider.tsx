@@ -30,9 +30,7 @@ class AnimeProvider {
       await this.animeDx.recreateADX();
       const data = await this.animeApi.bulkGetApi();
       await this.animeDx.bulkInsertADX(data);
-      debugger
       await this.animeDx.setVersionADX(this.config.version);
-      debugger
     }
     this.dbReady = true;
   }

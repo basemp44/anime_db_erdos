@@ -5,7 +5,7 @@
   --card-item-border-radius: 10px;
   --card-item-border-width: 3px;
   --card-item-opacity-start: 0.85;
-  --card-item-p-padding: 0.5rem;
+  --card-item-p-padding: 0.35rem;
   --character-color: 0, 0, 155;
   --anime-color: 155, 0, 0;
   --voiceactor-color: 0, 155, 0;
@@ -52,8 +52,8 @@
   text-align: left;
   border-radius: calc(var(--card-item-border-radius) - var(--card-item-border-width));
   padding: var(--card-item-p-padding);
-  padding-left: calc(var(--card-item-p-padding) + 4px);
-  width: calc(100% - var(--card-item-p-padding)*2 - 4px);
+  padding-left: calc(var(--card-item-p-padding) + 2px);
+  width: calc(100% - var(--card-item-p-padding)*2 - 2px);
 }
 
 .card-item p.status,
@@ -73,6 +73,7 @@
 .card-item p.status,
 .card-item p.rank {
   text-align: right;
+  z-index: 1;
 }
 
 .card-item p.status.green { color: green; }
@@ -80,7 +81,7 @@
 .card-item p.status.gray  { color: gray; }
 
 .card-item p.rank {
-  left: -16px
+  left: -20px;
 }
 
 .card-item p.name,
@@ -108,9 +109,22 @@
   background: linear-gradient(to top, rgba(var(--staff-color), var(--card-opacity-start)) 45%, rgba(var(--staff-color), 0) 100%)
 }
 
-.pointer {
+.card-item.pointer {
   cursor: pointer;
 }
+
+.card-item p {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.card-item:hover p {
+  white-space:initial;
+  text-overflow: initial;
+  overflow: initial;
+}
+
 
 .character {
   border-color: rgba(var(--character-color));

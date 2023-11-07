@@ -25,6 +25,7 @@ function Choices({
 			{
 				choices.map((choice: ICardItemLogic) => (
           <CardItem
+            key={`card-item-${choice.itemType}-${choice.id}`}
             itemType={choice.itemType}
             id={choice.id}
             onClick={async () => active ? await choiceOnClick(choice) : undefined}

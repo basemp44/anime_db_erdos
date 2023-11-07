@@ -10,21 +10,15 @@ interface IPathItemLogic {
   name: string
 }
 
-interface IPathItem extends IPathItemLogic{
-  index: number,
-}
 
 function PathItem({
   itemType,
-  id,
-  index,
   imgUrl,
   imgAlt,
   name
-}: IPathItem) {
+}: IPathItemLogic) {
   return (
     <div
-      key={`path-${itemType}-${id}-${index}`}
       className={`path-item ${itemType}`}>
       <div className="img-container">
         <img src={imgUrl} alt={imgAlt}/>
@@ -34,5 +28,5 @@ function PathItem({
   );
 }
 
-export type { IPathItemLogic, IPathItem };
+export type { IPathItemLogic };
 export { PathItem };

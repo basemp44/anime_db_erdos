@@ -114,13 +114,11 @@ class AnimeDexie extends Dexie {
     version: number
   ) {
     const dbVersion = (await this.dbVersion.get(1))?.version
-    debugger;
     return version != dbVersion;
   }
 
 
   async recreateADX() {
-    debugger;
     await this.delete();
     await this.open();
   }

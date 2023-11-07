@@ -25,7 +25,7 @@ function FromTo({
 				timeToggled={timeToggled}
 				main={from.main}
 				alt={from.alt}
-			/>
+				/>
 			<p className='arrow'>{String.fromCodePoint(10144)}</p>
 			<FromToItem
 				timeToggled={timeToggled}

@@ -27,7 +27,7 @@
 
 .path-item .img-container {
   height: var(--path-item-size);
-  width: var(--path-item-size);
+  min-width: var(--path-item-size);
   position: relative;
   overflow: hidden;
   border-radius: var(--path-item-border-radius);
@@ -57,7 +57,7 @@
 
 .path-item:last-of-type .img-container {
   height: var(--path-item-size-last);
-  width: var(--path-item-size-last);
+  min-width: var(--path-item-size-last);
 }
 
 .path-item:last-of-type img {

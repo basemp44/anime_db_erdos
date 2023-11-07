@@ -19,11 +19,9 @@
   transform: rotateY(0deg);
   transition: all var(--from-to-item-transition-time) ease-out;
   transition-delay: var(--from-to-item-transition-time);
-  z-index: 1;
 }
 
 .from-to-item-container.to-invisible {
   transform: rotateY(90deg);
   transition: all var(--from-to-item-transition-time) ease-in;
-  z-index: -1;
 }

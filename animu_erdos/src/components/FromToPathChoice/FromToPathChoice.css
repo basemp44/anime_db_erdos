@@ -5,4 +5,6 @@
     "path from-to from-to stats"
     "path choices choices stats";
   grid-gap: 10px;
+  grid-template-rows: calc(var(--from-to-item-size) + 2 * var(--from-to-padding)) auto;
+  height: 100vh;
 }
