@@ -71,6 +71,26 @@ class AnimeProvider {
   }
 
 
+  async _pickItemChoice(
+    choice: ICardItemLogic,
+    path: Array<IPathItemLogic>,
+    gameParams: IGameAnimeGameParams
+  ) {
+    const {paragraphs:_, ...pathItem} = choice;
+
+    const choices = await this._getChoices()(
+      choice.id,
+      choice.itemType,
+      gameParams.choice_options
+    );
+
+    return {
+      path: [...path, pathItem as IPathItemLogic],
+      choices
+    };
+  }
+
+
   async startNewGame(
     gameParams: IGameAnimeGameParams
   ) {
@@ -91,9 +111,9 @@ class AnimeProvider {
       gameParams.target_to_alt
     );
     
-    const partPathChoices = await this.pickItemChoice(
-      [],
+    const partPathChoices = await this._pickItemChoice(
       card_from,
+      [],
       gameParams
     );
 
@@ -114,24 +134,23 @@ class AnimeProvider {
     }
   }
 
-
-  async pickItemChoice(
-    path: Array<IPathItemLogic>,
+  async pickChoice(
+    to: ICardItemLogic,
     choice: ICardItemLogic,
+    path: Array<IPathItemLogic>,
     gameParams: IGameAnimeGameParams
   ) {
-    const {paragraphs:_, ...pathItem} = choice;
+    if ((choice.id === to.id) && (choice.itemType == to.itemType)) {
+      return {
+        status: EGameStatus.finish_ok
+      };
+    }
 
-    const choices = await this._getChoices()(
-      choice.id,
-      choice.itemType,
-      gameParams.choice_options
+    return await this._pickItemChoice(
+      choice,
+      path,
+      gameParams
     );
-
-    return {
-      path: [...path, pathItem as IPathItemLogic],
-      choices
-    };
   }
 }
 

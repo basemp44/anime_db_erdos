@@ -10,13 +10,15 @@ interface IChoicesLogic {
 
 
 interface IChoices extends IChoicesLogic {
-  choiceOnClick: Function
+  choiceOnClick: Function,
+  active: boolean
 };
 
 
 function Choices({
   choices,
-  choiceOnClick
+  choiceOnClick,
+  active
 } : IChoices) {
 	return (
 		<div className='choices'>
@@ -25,7 +27,8 @@ function Choices({
           <CardItem
             itemType={choice.itemType}
             id={choice.id}
-            onClick={async () => await choiceOnClick(choice)}
+            onClick={async () => active ? await choiceOnClick(choice) : undefined}
+            pointer={active}
             cardSize={ECardSize.L}
             imgUrl={choice.imgUrl}
             imgAlt={choice.imgAlt}

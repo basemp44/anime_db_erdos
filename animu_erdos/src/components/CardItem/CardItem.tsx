@@ -34,7 +34,8 @@ interface ICardItemLogicRel extends ICardItemLogic {
 
 interface ICardItem extends ICardItemLogic {
   onClick: React.MouseEventHandler<HTMLDivElement> | undefined,
-  cardSize: ECardSize
+  cardSize: ECardSize,
+  pointer: boolean
 };
 
 
@@ -42,13 +43,14 @@ function CardItem({
   itemType,
   id,
   onClick,
+  pointer,
   cardSize,
   imgUrl,
   imgAlt,
   name,
   paragraphs
 }: ICardItem) {
-  const cPointer = onClick ? 'pointer' : '';
+  const cPointer = pointer ? 'pointer' : '';
   return (
     <div
       key={`card-item-${itemType}-${id}`}

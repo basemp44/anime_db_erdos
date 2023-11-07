@@ -6,6 +6,7 @@ import { IGameAnimeFromTo } from './IGameAnimeFromTo';
 import { FromToPathChoice } from "../FromToPathChoice/FromToPathChoice";
 import { ICardItemLogic } from '../CardItem/CardItem';
 import { AnimeProvider } from './AnimeProvider';
+import { Modal } from '../Modal/Modal';
 
 
 async function persist() {
@@ -20,8 +21,46 @@ async function isStoragePersisted() {
 
 
 function GameAnimeFromTo() {
-  const [game, setGame] = useState<IGameAnimeFromTo>(initialgame as IGameAnimeFromTo)
+	const [game, setGame] = useState<IGameAnimeFromTo>(initialgame as IGameAnimeFromTo)
+	const [time, setTime] = useState(0);
+  const [isTimerRunning, setTimerIsRunning] = useState(false);
+	const [modalOpen, setModalOpen] = useState(false);
+
 	const animeProvider = new AnimeProvider(game.config);
+
+  // state to check stopwatch running or not
+
+  useEffect(() => {
+		const dateOld = Date.now()
+    let intervalId: number | undefined;
+
+		if (isTimerRunning) {
+      intervalId = setInterval(() => setTime((Date.now() - dateOld)/1000), 1000);
+    }
+    return () => clearInterval(intervalId);
+  }, [isTimerRunning]);
+
+	useEffect(() => {
+		switch(game.status) {
+			case EGameStatus.init:
+				setTimerIsRunning(false);
+				setModalOpen(false);
+				break;
+			case EGameStatus.playing:
+				setTime(0);
+				setTimerIsRunning(true);
+				break;
+			default:
+				setTimerIsRunning(false);
+				setModalOpen(true);
+		}
+	}, [game.status])
+
+	
+	useEffect(() => {
+		persist().then(() => animeProvider.initGame());
+	}, [])
+	
 	isStoragePersisted().then(async isPersisted => {
 		if (isPersisted) {
 			console.log(":) Storage is successfully persisted.");
@@ -34,11 +73,7 @@ function GameAnimeFromTo() {
 				console.log(":( Failed to make storage persisted");
 			}
 		}
-	})
-
-	useEffect(() => {
-		persist().then(() => animeProvider.initGame());
-	}, [])
+	});
 
 	if (game.status == EGameStatus.init)
 		return (
@@ -59,22 +94,55 @@ function GameAnimeFromTo() {
 		);
 	else
 		return (
-      <FromToPathChoice
-        timeToggled={game.config.fromToTimeToggled}
-        from={game.fromto[0]}
-        to={game.fromto[1]}
-        path={game.path}
-        choices={game.choices}
-        choiceOnClick={async (choice: ICardItemLogic) => {
-					const partialGame = await animeProvider.pickItemChoice(
-						game.path,
-						choice,
-						game.game_params
-					);
+			<>
+				{
+					modalOpen ? 
+						<Modal
+							closeOnClick={false}
+							setIsOpen={setModalOpen}
+							heading={<h3>Enhorabuena</h3>}
+							content={
+								<div>
+									<h4>Estadísticas</h4>
+									<p>Tiempo: {time}</p>
+									<p>Distancia: {game.path.length -1}</p>
+								</div>
+							}
+							footer={
+								<button onClick={
+									async () => {
+										const partialGame = await animeProvider.startNewGame(
+											game.game_params
+										);
+										setGame({...game, ...partialGame});
+										setModalOpen(false)
+									}
+								}>
+									New Game
+								</button>
+							}
+						/> :
+						<></>
+				}
+				<FromToPathChoice
+					timeToggled={game.config.fromToTimeToggled}
+					from={game.fromto[0]}
+					to={game.fromto[1]}
+					path={game.path}
+					choices={game.choices}
+					active={game.status === EGameStatus.playing}
+					choiceOnClick={async (choice: ICardItemLogic) => {
+						const partialGame = await animeProvider.pickChoice(
+							game.fromto[1].main,
+							choice,
+							game.path,
+							game.game_params
+						);
 
-					setGame({...game, ...partialGame})
-				}}
-      />
+						setGame({...game, ...partialGame})
+					}}
+				/>
+			</>
 		);
 }
 
