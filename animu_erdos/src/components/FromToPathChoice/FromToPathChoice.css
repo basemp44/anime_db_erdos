@@ -3,8 +3,10 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-areas:
     "path from-to from-to stats"
-    "path choices choices stats";
+    "path choices choices stats"
+    "path timer timer stats";
   grid-gap: 10px;
-  grid-template-rows: calc(var(--from-to-item-size) + 2 * var(--from-to-padding)) auto;
+  grid-template-rows: calc(var(--from-to-item-size) + 2 * var(--from-to-padding)) auto 64px;
   height: 100vh;
+  overflow: hidden;
 }

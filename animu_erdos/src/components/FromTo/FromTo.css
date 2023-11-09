@@ -9,7 +9,6 @@
   align-items: center;
   padding: var(--from-to-padding);
   gap: 1rem;
-  background-color: yellow;
 }
 
 .from-to .arrow {

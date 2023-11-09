@@ -35,7 +35,7 @@ function GameAnimeFromTo() {
     let intervalId: number | undefined;
 
 		if (isTimerRunning) {
-      intervalId = setInterval(() => setTime((Date.now() - dateOld)/1000), 1000);
+      intervalId = setInterval(() => setTime((Date.now() - dateOld)/1000), 10);
     }
     return () => clearInterval(intervalId);
   }, [isTimerRunning]);
@@ -59,21 +59,20 @@ function GameAnimeFromTo() {
 	
 	useEffect(() => {
 		persist().then(() => animeProvider.initGame());
-	}, [])
-	
-	isStoragePersisted().then(async isPersisted => {
-		if (isPersisted) {
-			console.log(":) Storage is successfully persisted.");
-		} else {
-			console.log(":( Storage is not persisted.");
-			console.log("Trying to persist..:");
-			if (await persist()) {
-				console.log(":) We successfully turned the storage to be persisted.");
+		isStoragePersisted().then(async isPersisted => {
+			if (isPersisted) {
+				console.log(":) Storage is successfully persisted.");
 			} else {
-				console.log(":( Failed to make storage persisted");
+				console.log(":( Storage is not persisted.");
+				console.log("Trying to persist..:");
+				if (await persist()) {
+					console.log(":) We successfully turned the storage to be persisted.");
+				} else {
+					console.log(":( Failed to make storage persisted");
+				}
 			}
-		}
-	});
+		});
+	}, [])
 
 	if (game.status == EGameStatus.init)
 		return (
@@ -126,6 +125,7 @@ function GameAnimeFromTo() {
 				}
 				<FromToPathChoice
 					timeToggled={game.config.fromToTimeToggled}
+					time={time}
 					from={game.fromto[0]}
 					to={game.fromto[1]}
 					path={game.path}

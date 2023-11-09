@@ -3,10 +3,12 @@ import { Choices } from '../Choices/Choices';
 import { FromTo } from '../FromTo/FromTo';
 import { IFromToItem } from '../FromToItem/FromToItem';
 import { Path } from '../Path/path';
+import { Timer } from '../Timer/Timer';
 
 
 interface IFromToPathChoice {
   timeToggled: number,
+  time: number,
   from: IFromToItem,
   to: IFromToItem,
   path: any,
@@ -18,6 +20,7 @@ interface IFromToPathChoice {
 
 function FromToPathChoice({
   timeToggled,
+  time,
   from,
   to,
   path,
@@ -37,6 +40,7 @@ function FromToPathChoice({
         choiceOnClick={choiceOnClick}
         active={active}/>
       <div className='stats'></div>
+      <Timer time={time}/>
     </div>
   )
 }
