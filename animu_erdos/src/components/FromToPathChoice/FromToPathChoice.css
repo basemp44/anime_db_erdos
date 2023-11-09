@@ -9,4 +9,6 @@
   grid-template-rows: calc(var(--from-to-item-size) + 2 * var(--from-to-padding)) auto 64px;
   height: 100vh;
   overflow: hidden;
+  background: radial-gradient(gray, black 65%);
+  color: white;
 }

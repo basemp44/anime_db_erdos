@@ -53,7 +53,7 @@
   border-radius: calc(var(--card-item-border-radius) - var(--card-item-border-width));
   padding: var(--card-item-p-padding);
   padding-left: calc(var(--card-item-p-padding) + 2px);
-  width: calc(100% - var(--card-item-p-padding)*2 - 2px);
+  width: calc(100% - var(--card-item-p-padding)*2);
 }
 
 .card-item p.status,
