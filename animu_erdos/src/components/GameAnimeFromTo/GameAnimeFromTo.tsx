@@ -46,9 +46,9 @@ function GameAnimeFromTo() {
 				setTimerIsRunning(false);
 				setModalOpen(false);
 				break;
-			case EGameStatus.playing:
-				setTime(0);
-				setTimerIsRunning(true);
+				case EGameStatus.playing:
+					setTime(0);
+					setTimerIsRunning(true);
 				break;
 			default:
 				setTimerIsRunning(false);
@@ -108,17 +108,27 @@ function GameAnimeFromTo() {
 								</div>
 							}
 							footer={
-								<button onClick={
-									async () => {
-										const partialGame = await animeProvider.startNewGame(
-											game.game_params
-										);
-										setGame({...game, ...partialGame});
-										setModalOpen(false)
-									}
-								}>
-									New Game
-								</button>
+								<div className='modal-footer-container'>
+									<button onClick={
+										async () => {
+											const partialGame = await animeProvider.startNewGame(
+												game.game_params
+											);
+											setGame({...game, ...partialGame});
+											setModalOpen(false)
+										}
+									}>
+										Nueva partida
+									</button>
+									<button onClick={
+										() => {
+											setGame({...game, status: EGameStatus.init});
+											setModalOpen(false)
+										}
+									}>
+										Volver
+									</button>
+								</div>
 							}
 						/> :
 						<></>

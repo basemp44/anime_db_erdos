@@ -1,4 +1,3 @@
-//mport './App.css'
 import { GameAnimeFromTo } from './components/GameAnimeFromTo/GameAnimeFromTo';
 
 

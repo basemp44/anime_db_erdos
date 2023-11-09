@@ -33,7 +33,7 @@ class AnimeDexie extends Dexie {
       .equals(itemType)
       .last() as ICardItemLogicRelWeight;
 
-    return Math.floor(Math.random() * cumweight);
+    return Math.random() * cumweight;
   }
 
 

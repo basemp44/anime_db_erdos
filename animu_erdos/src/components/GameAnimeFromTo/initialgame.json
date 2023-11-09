@@ -7,18 +7,16 @@
             "cardItemUrl": "string",
             "choicesUrl": "string"          
         },
-        "version": 1,
+        "version": 0,
         "fromToTimeToggled": 1500    
     },
     "game_params": {
-        "target_from_main": "character",
-        "target_from_alt": "anime",
-        "target_to_main": "character",
-        "target_to_alt": "anime",
+        "target_from_main": "anime",
+        "target_from_alt": "staff",
+        "target_to_main": "anime",
+        "target_to_alt": "staff",
         "choice_options": [
             "anime",
-            "character",
-            "voiceactor",
             "staff"
         ]
     },
