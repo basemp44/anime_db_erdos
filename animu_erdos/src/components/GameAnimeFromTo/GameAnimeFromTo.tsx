@@ -1,12 +1,15 @@
 import './GameAnimeFromTo.css';
-import initialgame from './initialgame.json';
+import { lensPath } from 'ramda';
 import { useEffect, useState } from 'react';
+import { AnimeProvider } from './AnimeProvider';
 import { EGameStatus } from './EGame';
 import { IGameAnimeFromTo } from './IGameAnimeFromTo';
-import { FromToPathChoice } from "../FromToPathChoice/FromToPathChoice";
+import initialgame from './initialgame.json';
 import { ICardItemLogic } from '../CardItem/CardItem';
-import { AnimeProvider } from './AnimeProvider';
-import { ISummaryGames, ModalFinish } from '../ModalFinish/ModalFinish';
+import { DropdownAnimeItemType } from '../DropdownAnimeItemType/DropdownAnimeItemType';
+import { FromToPathChoice } from "../FromToPathChoice/FromToPathChoice";
+import { ISummaryGames, ISummaryGame, ModalFinish } from '../ModalFinish/ModalFinish';
+import { CheckboxAnimeItemTypes } from '../CheckboxAnimeItemTypes/CheckboxAnimeItemTypes';
 
 
 async function persist() {
@@ -40,7 +43,7 @@ function GameAnimeFromTo() {
     }
     return () => clearInterval(intervalId);
   }, [isTimerRunning]);
-
+	game.game_params.target_from_main
 	useEffect(() => {
 		switch(game.status) {
 			case EGameStatus.init:
@@ -60,7 +63,7 @@ function GameAnimeFromTo() {
 				setTimerIsRunning(false);
 				setModalOpen(true);
 				setSummary(summary => [...summary.slice(0,-1), {
-					...summary.at(-1),
+					...summary.at(-1) as ISummaryGame,
 					distance: game.path.length,
 					time: time
 				}]);
@@ -93,18 +96,32 @@ function GameAnimeFromTo() {
 	if (game.status == EGameStatus.init)
 		return (
 			<div className='init-game'>
-				<div className='card'>
-					<button onClick={
-						async () => {
-							const partialGame = await animeProvider.startNewGame(
-								game.game_params
-							);
-							setGame({...game, ...partialGame});
-						}
-					}>
-						Start Game
-					</button>
-				</div>
+				<button onClick={
+					async () => {
+						const partialGame = await animeProvider.startNewGame(
+							game.game_params
+						);
+						setGame({...game, ...partialGame});
+						{game.game_params.target_from_main}
+					}
+				}>
+					Start Game
+				</button>
+				<DropdownAnimeItemType
+					trigger={<button>{game.game_params.target_from_main}</button>}
+					setGame={setGame}
+					lensMain={lensPath(['game_params', 'target_from_main'])}
+					lensAlt={lensPath(['game_params', 'target_from_alt'])}/>
+				<DropdownAnimeItemType
+					trigger={<button>{game.game_params.target_to_main}</button>}
+					setGame={setGame}
+					lensMain={lensPath(['game_params', 'target_to_main'])}
+					lensAlt={lensPath(['game_params', 'target_to_alt'])}/>
+				<CheckboxAnimeItemTypes
+					from={game.game_params.target_from_main}
+					to={game.game_params.target_to_main}
+					choices={game.game_params.choice_options}
+					setGame={setGame}/>
 			</div>
 		);
 	else

@@ -225,6 +225,7 @@ function ModalFinish({
 
 
 export type {
+  ISummaryGame,
   ISummaryGames
 };
 

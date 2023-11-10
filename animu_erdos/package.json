@@ -21,10 +21,12 @@
     "dexie": "^3.2.4",
     "dexie-react-hooks": "^1.1.7",
     "fflate": "^0.8.1",
+    "ramda": "^0.29.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/ramda": "^0.29.8",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
