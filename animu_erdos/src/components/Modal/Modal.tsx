@@ -1,7 +1,15 @@
-// @src/components/Modal.jsx
-
-import React from "react";
+import { ReactNode } from 'react';
 import './Modal.css';
+
+
+interface IModal {
+  closeOnClick: boolean,
+  setIsOpen: Function,
+  heading: ReactNode | undefined,
+  content: ReactNode,
+  footer: ReactNode | undefined
+}
+
 
 function Modal ({
   closeOnClick,
@@ -9,13 +17,7 @@ function Modal ({
   heading,
   content,
   footer
-}: {
-  closeOnClick: boolean,
-  setIsOpen: Function,
-  heading: React.ReactNode | undefined,
-  content: React.ReactNode,
-  footer: React.ReactNode | undefined
-}) {
+}: IModal) {
   return (
     <>
       <div

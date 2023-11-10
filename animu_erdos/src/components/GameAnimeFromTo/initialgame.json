@@ -3,7 +3,7 @@
         "api": {
             "baseUrl": "string",
             "initUrl": "string",
-            "bulkGetUrl": "animedb.json",
+            "bulkGetUrl": "animedb.json.gz",
             "cardItemUrl": "string",
             "choicesUrl": "string"          
         },

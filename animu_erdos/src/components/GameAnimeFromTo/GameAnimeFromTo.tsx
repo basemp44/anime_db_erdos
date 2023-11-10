@@ -6,7 +6,7 @@ import { IGameAnimeFromTo } from './IGameAnimeFromTo';
 import { FromToPathChoice } from "../FromToPathChoice/FromToPathChoice";
 import { ICardItemLogic } from '../CardItem/CardItem';
 import { AnimeProvider } from './AnimeProvider';
-import { Modal } from '../Modal/Modal';
+import { ISummaryGames, ModalFinish } from '../ModalFinish/ModalFinish';
 
 
 async function persist() {
@@ -25,6 +25,7 @@ function GameAnimeFromTo() {
 	const [time, setTime] = useState(0);
   const [isTimerRunning, setTimerIsRunning] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
+	const [summary, setSummary] = useState([] as ISummaryGames)
 
 	const animeProvider = new AnimeProvider(game.config);
 
@@ -46,13 +47,28 @@ function GameAnimeFromTo() {
 				setTimerIsRunning(false);
 				setModalOpen(false);
 				break;
-				case EGameStatus.playing:
-					setTime(0);
-					setTimerIsRunning(true);
+			case EGameStatus.playing:
+				setTime(0);
+				setTimerIsRunning(true);
+				setSummary(summary => [...summary, {
+					from: game.game_params.target_from_main,
+					to: game.game_params.target_to_main,
+					choices: game.game_params.choice_options
+				}]);
 				break;
-			default:
+			case EGameStatus.finish_ok:
 				setTimerIsRunning(false);
 				setModalOpen(true);
+				setSummary(summary => [...summary.slice(0,-1), {
+					...summary.at(-1),
+					distance: game.path.length,
+					time: time
+				}]);
+				break;
+			case EGameStatus.finish_ko:
+				setTimerIsRunning(false);
+				setModalOpen(true);
+				
 		}
 	}, [game.status])
 
@@ -96,41 +112,25 @@ function GameAnimeFromTo() {
 			<>
 				{
 					modalOpen ? 
-						<Modal
-							closeOnClick={false}
+						<ModalFinish
 							setIsOpen={setModalOpen}
-							heading={<h3>Enhorabuena</h3>}
-							content={
-								<div>
-									<h4>Estadísticas</h4>
-									<p>Tiempo: {time}</p>
-									<p>Distancia: {game.path.length -1}</p>
-								</div>
-							}
-							footer={
-								<div className='modal-footer-container'>
-									<button onClick={
-										async () => {
-											const partialGame = await animeProvider.startNewGame(
-												game.game_params
-											);
-											setGame({...game, ...partialGame});
-											setModalOpen(false)
-										}
-									}>
-										Nueva partida
-									</button>
-									<button onClick={
-										() => {
-											setGame({...game, status: EGameStatus.init});
-											setModalOpen(false)
-										}
-									}>
-										Volver
-									</button>
-								</div>
-							}
-						/> :
+							time={time}
+							distance={game.path.length}
+							onClickNewGame={async () => {
+								const partialGame = await animeProvider.startNewGame(
+									game.game_params
+								);
+								setGame({ ...game, ...partialGame });
+								setModalOpen(false);
+							}}
+							onClickReturn={() => {
+								setGame({ ...game, status: EGameStatus.init });
+								setModalOpen(false);
+							}}
+							from={game.game_params.target_from_main}
+							to={game.game_params.target_to_main}
+							choices={game.game_params.choice_options}
+							sessionSummary={summary}/> :
 						<></>
 				}
 				<FromToPathChoice

@@ -142,6 +142,10 @@ class AnimeDexie extends Dexie {
     itemTypeAlt: EItemType
   ) {
     const { relations, ...main } = await this.getCardItemLogicRel({id, itemType}, []) || {};
+    if (!itemTypeAlt) {
+      return [main as ICardItemLogicRel, null];
+    }
+
     const relation = relations
       ?.find(({ itemType }) => itemType == itemTypeAlt) as ICardItemLogicMin;
     const alt = await this.getCardItemLogicRel(relation, []);
