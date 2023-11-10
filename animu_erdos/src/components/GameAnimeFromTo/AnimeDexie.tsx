@@ -113,8 +113,8 @@ class AnimeDexie extends Dexie {
   async shouldRecreateADX(
     version: number
   ) {
-    const dbVersion = (await this.dbVersion.get(1))?.version
-    return version != dbVersion;
+    const versionRow = await this.dbVersion.get(1)
+    return versionRow?.version !== version
   }
 
 

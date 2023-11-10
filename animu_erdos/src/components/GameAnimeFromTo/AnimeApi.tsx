@@ -5,7 +5,8 @@ const HEADERS_GET_GZIP = {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
-    'Transfer-Encoding': 'gzip',
+    'Content-Encoding': 'gzip',
+    'Transfer-Encoding': 'gzip'
   },
 };
 

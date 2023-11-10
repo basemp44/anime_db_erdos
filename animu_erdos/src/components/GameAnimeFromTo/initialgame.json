@@ -3,11 +3,11 @@
         "api": {
             "baseUrl": "string",
             "initUrl": "string",
-            "bulkGetUrl": "./animedb.json.gz",
+            "bulkGetUrl": "animedb.json",
             "cardItemUrl": "string",
             "choicesUrl": "string"          
         },
-        "version": 0,
+        "version": 1,
         "fromToTimeToggled": 1500    
     },
     "game_params": {
