@@ -2,7 +2,6 @@
   grid-area: timer;
   font-family: 'Courier New', Courier, monospace;
   font-size: 48px;
-  background-color: black;
   display: flex;
   max-height: 64px;
   justify-self: center;
