@@ -18,19 +18,21 @@ function Path({path}: IPath) {
 
 	return (
 		<div className='path'>
-			{
-				path.map((item: any, index: number) => (
-					<PathItem
-						key={`path-${item.itemType}-${item.id}-${index}`}
-						itemType={item.itemType}
-						id={item.id}
-						imgUrl={item.imgUrl}
-						imgAlt={item.imgAlt}
-						name={item.name}
-					/>
-				))
-			}
-			<span ref={pathEndRef} />
+			<div className="path-container">
+				{
+					path.map((item: any, index: number) => (
+						<PathItem
+							key={`path-${item.itemType}-${item.id}-${index}`}
+							itemType={item.itemType}
+							id={item.id}
+							imgUrl={item.imgUrl}
+							imgAlt={item.imgAlt}
+							name={item.name}
+						/>
+					))
+				}
+				<span ref={pathEndRef} />
+			</div>
 		</div>
 	);
 }

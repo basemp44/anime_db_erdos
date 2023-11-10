@@ -1,11 +1,16 @@
 .path {
   grid-area: path;
+  padding: 1rem;
+  height: calc(100vh - 2rem);
+}
+
+.path-container {
+  height: calc(100vh - 2rem);
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  padding: 1rem;
 }
 
-.path::-webkit-scrollbar {
+.path-container::-webkit-scrollbar {
   display: none;
 }
