@@ -1,14 +1,22 @@
+/*
+--from-to-path-choice-bg-color-1
+--from-to-path-choice-bg-color-2
+--from-to-path-choice-bg-rgsize
+*/
+
 .from-to-path-choice {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-areas:
     "path from-to from-to stats"
     "path choices choices stats"
-    "path timer timer stats";
+    "path timer timer version";
   grid-gap: 10px;
   grid-template-rows: calc(var(--from-to-item-size) + 2 * var(--from-to-padding)) auto 80px;
   height: 100vh;
   overflow: hidden;
-  background: radial-gradient(gray, black 80%);
+  background: radial-gradient(
+    var(--from-to-path-choice-bg-color-1, gray),
+    var(--from-to-path-choice-bg-color-2, black) var(--from-to-path-choice-bg-rgsize, 80%));
   color: white;
 }

@@ -14,7 +14,8 @@ interface IFromToPathChoice {
   path: any,
   choices: any,
   choiceOnClick: Function,
-  active: boolean
+  active: boolean,
+  version: string
 };
 
 
@@ -26,7 +27,8 @@ function FromToPathChoice({
   path,
   choices,
   choiceOnClick,
-  active
+  active,
+  version
 }: IFromToPathChoice) {
   return (
     <div className='from-to-path-choice'>
@@ -41,6 +43,9 @@ function FromToPathChoice({
         active={active}/>
       <div className='stats'></div>
       <Timer time={time}/>
+      <div className='version'>
+        <span>{version}</span>
+      </div>
     </div>
   )
 }

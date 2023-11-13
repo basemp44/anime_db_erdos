@@ -1,0 +1,124 @@
+:root {
+  --color-main: 50, 53, 129;
+  --color-mono-1: 34, 49, 88;
+  --color-mono-2: 179, 199, 255;
+  --color-mono-3: 214, 226, 255;
+
+  --init-game-bg-color-1: rgb(var(--color-mono-3));
+  --init-game-bg-color-2: rgb(var(--color-mono-2));
+  --init-game-bg-rgsize: 80%;
+  --from-to-path-choice-bg-color-1: rgb(var(--color-main));
+  --from-to-path-choice-bg-color-2: rgb(var(--color-mono-1));
+  --from-to-path-choice-bg-rgsize: var(--init-game-bg-rgsize);
+}
+
+
+.game-options {
+  min-width: 300px;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  padding: 2rem;
+  background: rgba(33,33,33,0.92);
+  box-shadow: rgb(0, 0, 0) 0px 0px 33px 13px;
+  color: white;
+}
+
+.from-to-options {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label.checkbox {min-width: 100px;}
+
+.init-game-btn-container {
+  display: flex;
+  width: 300px;
+  height: 47px;
+  align-items: center;
+  justify-content: center;
+}
+
+.init-game .init-game-btn-container {
+  box-shadow: 0 0 10px 2px rgb(0, 0, 0);
+  background-color: rgb(50, 52, 127);
+  background-image: url(onk.svg), url(onk.svg);
+  background-position-x: 20px, 230px;
+  background-size: contain, contain;
+  background-blend-mode: normal,saturation;
+  background-repeat: no-repeat;
+  color: white;
+  border-radius: 1px;
+  min-width: 230px;
+  background-origin: content-box;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+
+.init-game .init-game-btn {
+  width: 100%;
+  height: calc(100% + 2 * 1rem);
+  background-color: rgba(50, 52, 127, 1);
+  color: white;
+  border-radius: 0px;
+  transition: background-color .5s ease-out;
+}
+
+.init-game .init-game-btn:hover {
+  background-color: rgba(50, 52, 127, 0.5);
+}
+
+.version {
+  grid-area: version;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.init-game {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(
+    var(--init-game-bg-color-1),
+    var(--init-game-bg-color-2) var(--init-game-bg-rgsize));
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}

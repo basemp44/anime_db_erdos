@@ -7,7 +7,7 @@
             "cardItemUrl": "string",
             "choicesUrl": "string"          
         },
-        "version": 1,
+        "version": "0.0.0.2023.11.13",
         "fromToTimeToggled": 1500    
     },
     "game_params": {

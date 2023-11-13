@@ -16,7 +16,7 @@ export interface IGameApiParams {
 
 export interface IGameConfig {
 	api: IGameApiParams,
-	version: number
+	version: string,
 	fromToTimeToggled: number
 };
 

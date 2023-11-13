@@ -96,32 +96,39 @@ function GameAnimeFromTo() {
 	if (game.status == EGameStatus.init)
 		return (
 			<div className='init-game'>
-				<button onClick={
-					async () => {
-						const partialGame = await animeProvider.startNewGame(
-							game.game_params
-						);
-						setGame({...game, ...partialGame});
-						{game.game_params.target_from_main}
-					}
-				}>
-					Start Game
-				</button>
-				<DropdownAnimeItemType
-					trigger={<button>{game.game_params.target_from_main}</button>}
-					setGame={setGame}
-					lensMain={lensPath(['game_params', 'target_from_main'])}
-					lensAlt={lensPath(['game_params', 'target_from_alt'])}/>
-				<DropdownAnimeItemType
-					trigger={<button>{game.game_params.target_to_main}</button>}
-					setGame={setGame}
-					lensMain={lensPath(['game_params', 'target_to_main'])}
-					lensAlt={lensPath(['game_params', 'target_to_alt'])}/>
-				<CheckboxAnimeItemTypes
-					from={game.game_params.target_from_main}
-					to={game.game_params.target_to_main}
-					choices={game.game_params.choice_options}
-					setGame={setGame}/>
+				<div className="init-game-btn-container">
+					<button className="init-game-btn" onClick={
+						async () => {
+							const partialGame = await animeProvider.startNewGame(
+								game.game_params
+							);
+							setGame({...game, ...partialGame});
+							{game.game_params.target_from_main}
+						}
+					}>
+						Jugar
+					</button>
+				</div>
+				<div className='game-options'>
+					<div className='from-to-options'>
+						<DropdownAnimeItemType
+							trigger={<button>{game.game_params.target_from_main}</button>}
+							setGame={setGame}
+							lensMain={lensPath(['game_params', 'target_from_main'])}
+							lensAlt={lensPath(['game_params', 'target_from_alt'])}/>
+						<span>VS</span>
+						<DropdownAnimeItemType
+							trigger={<button>{game.game_params.target_to_main}</button>}
+							setGame={setGame}
+							lensMain={lensPath(['game_params', 'target_to_main'])}
+							lensAlt={lensPath(['game_params', 'target_to_alt'])}/>
+					</div>
+					<CheckboxAnimeItemTypes
+						from={game.game_params.target_from_main}
+						to={game.game_params.target_to_main}
+						choices={game.game_params.choice_options}
+						setGame={setGame}/>
+				</div>
 			</div>
 		);
 	else
@@ -158,6 +165,7 @@ function GameAnimeFromTo() {
 					path={game.path}
 					choices={game.choices}
 					active={game.status === EGameStatus.playing}
+					version={game.config.version}
 					choiceOnClick={async (choice: ICardItemLogic) => {
 						const partialGame = await animeProvider.pickChoice(
 							game.fromto[1].main,
